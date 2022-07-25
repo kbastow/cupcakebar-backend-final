@@ -1,0 +1,36 @@
+{
+  "name": "cupcakebar-backend",
+  "version": "1.0.0",
+  "description": "Cupcake Bar Full Stack Application",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kbastow/cupcakebar-backend.git"
+  },
+  "keywords": [],
+  "author": "Team Red",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kbastow/cupcakebar-backend/issues"
+  },
+  "homepage": "https://github.com/kbastow/cupcakebar-backend#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-fileupload": "^1.4.0",
+    "express-jwt": "^7.7.5",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.4.4",
+    "mongoose-type-email": "^1.1.2",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
