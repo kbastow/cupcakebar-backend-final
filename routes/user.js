@@ -80,16 +80,13 @@ router.put('/:id', Utils.authenticateToken, (req, res) => {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
-            avatar: avatarFilename,               
+            avatar: avatarFilename,
+            accessLevel: req.body.accessLevel               
         })
       })
   }else{
     // update user without avatar
-    updateUser({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email 
-    })
+    updateUser(req.body)
   }
 
     // update User
