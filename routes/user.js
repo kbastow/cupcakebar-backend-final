@@ -73,7 +73,7 @@ router.put('/:id', Utils.authenticateToken, (req, res) => {
       if(req.files && req.files.avatar){
         // upload avater image then update user
         let uploadPath = path.join(__dirname, '..', 'public', 'images')
-        utils.uploadFile(req.files.avatar, uploadPath, (uniqueFilename) => {
+        Utils.uploadFile(req.files.avatar, uploadPath, (uniqueFilename) => {
           avatarFilename = uniqueFilename
           // update user with all fields including avatar
           updateUser({
