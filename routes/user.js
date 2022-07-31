@@ -36,6 +36,36 @@ router.put('/addSavedProducts/', Utils.authenticateToken, (req, res) => {
       })
 })
 
+// PUT - add to userCart --------------------------------------
+
+router.put('/addToCart/', Utils.authenticateToken, (req, res) => {  
+  // validate check
+  if(!req.body.productId){
+    return res.status(400).json({
+      message: "No product specified"
+    })
+  }
+  // add productId to userCart field (array - push)
+  User.updateOne({
+    _id: req.user._id
+  }, {
+    $push: {
+      userCart: req.body.productId
+    }
+  })
+    .then((user) => {            
+      res.json({
+        message: "Added to cart"
+      })
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({
+        message: "Problem adding to cart"
+      })
+    })
+})
+
 // GET - get single user -------------------------------------------------------
 
 router.get('/:id', Utils.authenticateToken, (req, res) => {
@@ -45,7 +75,7 @@ router.get('/:id', Utils.authenticateToken, (req, res) => {
       })
     }
   
-    User.findById(req.params.id).populate('savedProducts')
+    User.findById(req.params.id).populate('savedProducts', 'userCart')
       .then(user => {
         res.json(user)
       })
@@ -86,7 +116,12 @@ router.put('/:id', Utils.authenticateToken, (req, res) => {
       })
   }else{
     // update user without avatar
-    updateUser(req.body)
+    updateUser({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email, 
+      accessLevel: req.body.accessLevel
+    })
   }
 
     // update User

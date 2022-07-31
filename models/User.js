@@ -32,6 +32,9 @@ const userSchema = new mongoose.Schema({
     },
     savedProducts: [
       {type: Schema.ObjectId, ref: 'Product'}
+    ],
+    userCart: [
+        {type: Schema.ObjectId, ref: 'Cart'}
     ]
 }, {timestamps: true})
 
