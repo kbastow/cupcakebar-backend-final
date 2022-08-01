@@ -10,8 +10,9 @@ const orderSchema = new mongoose.Schema({
     ref: 'User'
     },
     orderSummary: {
-    type: Array,
-    required: true
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'Product'
     },
     orderStatus: {
     type: Boolean

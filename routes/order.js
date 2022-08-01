@@ -30,7 +30,7 @@ router.post('/', (req, res) => {
   }
   // validate - check if all fields are complete
   if(!req.body){
-    return res.status(400).send({message: "Please compete all sections"})
+    return res.status(400).send({message: "Please complete order"})
   }
 
   console.log('req.body = ', req.body)
