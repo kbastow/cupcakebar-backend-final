@@ -75,9 +75,7 @@ router.get('/:id', Utils.authenticateToken, (req, res) => {
       })
     }
   
-    User.findById(req.params.id)
-    .populate('savedProducts')
-    .populate('userCart')
+    User.findById(req.params.id).populate('savedProducts')
       .then(user => {
         res.json(user)
       })
