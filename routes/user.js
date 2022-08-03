@@ -101,7 +101,7 @@ router.put('/:id', Utils.authenticateToken, (req, res) => {
     let avatarFilename = null
       // if avatar image exists, upload!
       if(req.files && req.files.avatar){
-        // upload avater image then update user
+        // upload avatar image then update user
         let uploadPath = path.join(__dirname, '..', 'public', 'images')
         Utils.uploadFile(req.files.avatar, uploadPath, (uniqueFilename) => {
           avatarFilename = uniqueFilename

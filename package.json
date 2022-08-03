@@ -1,5 +1,5 @@
 {
-  "name": "cupcakebar-backend",
+  "name": "cupcake-bar-final",
   "version": "1.0.0",
   "description": "Cupcake Bar Full Stack Application",
   "main": "server.js",
@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kbastow/cupcakebar-backend.git"
+    "url": "git+https://github.com/kbastow/cupcake-bar-final.git"
   },
   "keywords": [],
   "author": "Team Red",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kbastow/cupcakebar-backend/issues"
+    "url": "https://github.com/kbastow/cupcake-bar-final/issues"
   },
-  "homepage": "https://github.com/kbastow/cupcakebar-backend#readme",
+  "homepage": "https://github.com/kbastow/cupcake-bar-final#readme",
   "dependencies": {
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
