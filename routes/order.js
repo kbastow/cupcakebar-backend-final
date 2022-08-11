@@ -23,8 +23,9 @@ router.get('/', Utils.authenticateToken, (req, res) => {
 })
 
 // POST - create new order --------------------------------------
-router.post('/', (req, res) => {
-  // validate 
+router.post('/', Utils.authenticateToken, (req, res) => {
+  // validate
+  console.log(req.body)
   if(Object.keys(req.body).length === 0){   
     return res.status(400).send({message: "Order can't be empty"})
   }
@@ -37,8 +38,10 @@ router.post('/', (req, res) => {
 
   // create new order
   let newOrder = new Order({
-    user: req.body.user,
-    orderSummary: req.body.orderSummary,
+    user: req.body.id,
+    products: req.body.products,
+    total: req.body.total,
+    status: req.body.status
 
   })
   

@@ -9,10 +9,12 @@ const orderSchema = new mongoose.Schema({
     required: true,
     ref: 'User'
     },
-    orderSummary: {
-    type: Schema.Types.ObjectId,
-    required: true,
-    ref: 'Product'
+    products: [
+        {type: Schema.ObjectId, ref: 'Product'}
+    ],
+    total: {
+        type: Number,
+        required: true,
     },
     orderStatus: {
     type: Boolean
