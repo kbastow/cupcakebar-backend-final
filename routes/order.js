@@ -57,6 +57,7 @@ router.post('/', Utils.authenticateToken, (req, res) => {
         error: err
       })
     })
+})
   })
 
 // export
