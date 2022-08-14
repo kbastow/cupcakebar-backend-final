@@ -36,6 +36,37 @@ router.put('/addSavedProducts/', Utils.authenticateToken, (req, res) => {
       })
 })
 
+
+// DELETE - Remove product from favourites ---------------------------------------------
+
+router.delete("/deleteSavedProducts/", (req, res) => {
+  // validate the request
+  if(!req.body.productId){
+    return res.status(400).json({
+      message: "no product specified"
+    })
+  }
+  // remove savedProduct from favourites using User model
+  User.findOneAndDelete({
+    _id: req.user._id
+  }, {
+    $delete: {
+      savedProducts: req.body.productId
+    }
+  })
+  .then(() => {
+    res.json
+  })
+  .catch((err) => {
+    console.log("error removing product", err)
+    res.status(500).json({
+      message: "error removing product",
+      error: err
+    })
+  })
+})
+
+
 // PUT - add to userCart --------------------------------------
 
 router.put('/addToCart/', Utils.authenticateToken, (req, res) => {  
@@ -65,6 +96,37 @@ router.put('/addToCart/', Utils.authenticateToken, (req, res) => {
       })
     })
 })
+
+
+// DELETE - Remove items from userCart ---------------------------------------------
+
+router.delete("/deleteUserCart/", (req, res) => {
+  // validate the request
+  if(!req.body.productId){
+    return res.status(400).json({
+      message: "no product"
+    })
+  }
+  // remove product from userCart using User model
+  User.findOneAndDelete({
+    _id: req.user._id
+  }, {
+    $delete: {
+      userCart: req.body.productId
+    }
+  })
+  .then(() => {
+    res.json
+  })
+  .catch((err) => {
+    console.log("error removing product", err)
+    res.status(500).json({
+      message: "error removing product",
+      error: err
+    })
+  })
+})
+
 
 // GET - get single user -------------------------------------------------------
 
