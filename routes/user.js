@@ -39,7 +39,7 @@ router.put('/addSavedProducts/', Utils.authenticateToken, (req, res) => {
 
 // DELETE - Remove product from favourites ---------------------------------------------
 
-router.delete("/deleteSavedProducts",  Utils.authenticateToken,(req, res) => {
+router.delete('/deleteSavedProducts/', (req, res) => {
   // validate the request
   if(!req.body.productId){
     return res.status(400).json({
@@ -100,7 +100,7 @@ router.put('/addToCart/', Utils.authenticateToken, (req, res) => {
 
 // DELETE - Remove items from userCart ---------------------------------------------
 
-router.delete("/deleteUserCart/", Utils.authenticateTokenToken,(req, res) => {
+router.delete('/deleteUserCart/', (req, res) => {
   // validate the request
   if(!req.body.productId){
     return res.status(400).json({
