@@ -39,7 +39,7 @@ router.put('/addSavedProducts/', Utils.authenticateToken, (req, res) => {
 
 // DELETE - Remove product from favourites ---------------------------------------------
 
-router.delete("/deleteSavedProducts/", (req, res) => {
+router.delete("/deleteSavedProducts",  Utils.authenticateToken,(req, res) => {
   // validate the request
   if(!req.body.productId){
     return res.status(400).json({
@@ -47,10 +47,10 @@ router.delete("/deleteSavedProducts/", (req, res) => {
     })
   }
   // remove savedProduct from favourites using User model
-  User.findOneAndDelete({
+  User.findOneAndUpdate({
     _id: req.user._id
   }, {
-    $delete: {
+    $pull: {
       savedProducts: req.body.productId
     }
   })
@@ -100,18 +100,18 @@ router.put('/addToCart/', Utils.authenticateToken, (req, res) => {
 
 // DELETE - Remove items from userCart ---------------------------------------------
 
-router.delete("/deleteUserCart/", (req, res) => {
+router.delete("/deleteUserCart/", Utils.authenticateTokenToken,(req, res) => {
   // validate the request
   if(!req.body.productId){
     return res.status(400).json({
-      message: "no product"
+      message: "no product specified"
     })
   }
   // remove product from userCart using User model
-  User.findOneAndDelete({
+  User.findOneAndUpdate({
     _id: req.user._id
   }, {
-    $delete: {
+    $pull: {
       userCart: req.body.productId
     }
   })
