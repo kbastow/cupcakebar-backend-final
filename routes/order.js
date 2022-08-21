@@ -5,7 +5,7 @@ const Order = require('./../models/Order')
 
 // GET- get orders ---------------------------
 router.get('/', Utils.authenticateToken, (req, res) => {
-  Order.find()
+  Order.find().populate('user').populate('products')
     .then(orders => {
       if(orders == null){
         return res.status(404).json({

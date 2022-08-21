@@ -116,7 +116,7 @@ router.delete('/deleteUserCart/', Utils.authenticateToken,(req, res) => {
     }
   })
   .then(() => {
-    res.json
+    res.json({ message: "success" })
   })
   .catch((err) => {
     console.log("error removing product", err)

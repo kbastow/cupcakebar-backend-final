@@ -8,7 +8,7 @@ const path = require('path')
 
 // GET - get all products ---------------------------
 
-router.get('/', Utils.authenticateToken, (req, res) => {
+router.get('/', (req, res) => {
   Product.find()
     .then(products => {
       if(products == null){
@@ -29,7 +29,7 @@ router.get('/', Utils.authenticateToken, (req, res) => {
 
 // GET - get single product by id -------------------------------------------------------
 
-router.get('/:id', Utils.authenticateToken, (req, res) => {
+router.get('/:id', (req, res) => {
   Product.findById(req.params.id)
     .then(product => {
       if(product == null){
