@@ -59,6 +59,30 @@ router.post('/', Utils.authenticateToken, (req, res) => {
     })
 })
 
+// DELETE - Remove items from orders view ---------------------------------------------
+
+router.delete('/deleteOrder/', Utils.authenticateToken,(req, res) => {
+  // validate the request
+  if(!req.body.orderId){
+    return res.status(400).json({
+      message: "no order specified"
+    })
+  }
+  // remove order from orders view using Order model
+  Order.findOneAndDelete({
+    _id: req.order._id
+  })
+  .then(() => {
+    res.json({ message: "success" })
+  })
+  .catch((err) => {
+    console.log("error removing order", err)
+    res.status(500).json({
+      message: "error removing order",
+      error: err
+    })
+  })
+})
 
 // export
 module.exports = router
