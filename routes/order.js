@@ -69,7 +69,7 @@ router.delete('/deleteOrder/', Utils.authenticateToken,(req, res) => {
     })
   }
   // remove order from orders view using Order model
-  Order.findAndUpdate({
+  Order.findOneAndUpdate({
     _id: req.order._id
   }, {
     $pull: {
