@@ -21,10 +21,10 @@ mongoose.connect(process.env.MONGO_URI, {
 
 // express app ---------------------------------------------
 const app = express()
+app.use('*', cors())
 app.use(express.static('public'));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
-app.use('*', cors())
 app.use(fileUpload({
     limits: { fileSize: 50 * 1024 * 1024 }
   }))
@@ -32,9 +32,19 @@ app.use(fileUpload({
 // routes ---------------------------------------------
 
 // homepage
-app.get('/', (req,res) => {
+app.get('/', cors(corsOptions), function (req, res) {
     res.send("Cupcake Bar")
   })
+
+  var corsOptions = {
+    origin: function (origin, callback) {
+      if (whitelist.indexOf(origin) !== -1 || !origin) {
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
+    }
+  }
 
 //auth ---------------------------------------------
 const authRouter = require("./routes/auth")
