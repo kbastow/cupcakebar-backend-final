@@ -24,10 +24,7 @@ const app = express()
 app.use(express.static('public'));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  next();
-});
+app.use('*', cors())
 app.use(fileUpload({
     limits: { fileSize: 50 * 1024 * 1024 }
   }))
