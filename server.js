@@ -3,7 +3,7 @@ require("dotenv").config()
 const bodyParser = require("body-parser")
 const express = require("express")
 const mongoose = require("mongoose")
-const cors = require("no-cors")
+const cors = require("cors")
 const fileUpload = require ("express-fileupload")
 const port = process.env.PORT || 5500
 
@@ -24,7 +24,7 @@ const app = express()
 app.use(express.static('public'));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
-app.use('Access-Control-Allow-Origin', '*', cors())
+app.use('*', cors())
 app.use(fileUpload({
     limits: { fileSize: 50 * 1024 * 1024 }
   }))
