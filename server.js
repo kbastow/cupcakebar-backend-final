@@ -2,8 +2,9 @@
 require("dotenv").config()
 const bodyParser = require("body-parser")
 const express = require("express")
+const request = require('request');
 const mongoose = require("mongoose")
-const cors = require("cors")
+// const cors = require("cors")
 const fileUpload = require ("express-fileupload")
 const port = process.env.PORT || 5500
 
@@ -21,10 +22,14 @@ mongoose.connect(process.env.MONGO_URI, {
 
 // express app ---------------------------------------------
 const app = express()
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+  });
 app.use(express.static('public'));
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
-app.use('*', cors())
+// app.use('*', cors())
 app.use(fileUpload({
     limits: { fileSize: 50 * 1024 * 1024 }
   }))
@@ -33,8 +38,17 @@ app.use(fileUpload({
 
 // homepage
 app.get('/', (req,res) => {
-    res.send("Cupcake Bar")
-  })
+    request(
+        { url: 'https://wild-jay-waders.cyclic.app' },
+        (error, response, body) => {
+          if (error || response.statusCode !== 200) {
+            return res.status(500).json({ type: 'error', message: err.message });
+          }
+    
+          res.json(JSON.parse(body));
+        }
+      )
+    });
 
 //auth ---------------------------------------------
 const authRouter = require("./routes/auth")
